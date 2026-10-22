@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#faf9f6">
+  <meta name="description" content="Create a personal virtual clothing try-on preview with FitMirror AI.">
+  <title>Your AI Fitting Room — FitMirror AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/try-on.css">
+</head>
+<body class="tryon-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><nav class="navbar navbar-expand-lg site-nav" aria-label="Main navigation"><div class="container">
+    <a class="navbar-brand brand" href="index.html" aria-label="FitMirror AI home"><span class="brand-mark"><i class="bi bi-stars"></i></span><span>fitmirror<span class="brand-ai">.ai</span></span></a>
+    <button class="navbar-toggler nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Open navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="mainNav"><ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+      <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li><li class="nav-item"><a class="nav-link active" aria-current="page" href="try-on.html">Virtual Try-On</a></li><li class="nav-item"><a class="nav-link" href="history.html">My History</a></li><li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li><li class="nav-item ms-lg-3"><a class="btn btn-primary-soft" href="#fitting-room">Start a look <i class="bi bi-arrow-down"></i></a></li>
+    </ul></div>
+  </div></nav></header>
+  <main id="main" class="tryon-main">
+    <section class="tryon-intro container">
+      <div><p class="eyebrow"><span class="eyebrow-dot"></span> Your space, your style</p><h1>Your personal AI<br><em>fitting room.</em></h1><p>Choose a piece, add your photo, and explore a visual preview of your next look.</p></div>
+      <div class="privacy-chip"><i class="bi bi-shield-lock"></i><span>Your photo is only sent after you give consent.</span></div>
+    </section>
+    <section class="workflow container" id="fitting-room">
+      <div class="workflow-stepper" aria-label="Try-on steps">
+        <div class="workflow-step is-active" data-step-indicator="1"><span>01</span><div><strong>Choose clothing</strong><small>Product link or image</small></div></div>
+        <span class="stepper-line"></span>
+        <div class="workflow-step" data-step-indicator="2"><span>02</span><div><strong>Add your photo</strong><small>A clear image of you</small></div></div>
+        <span class="stepper-line"></span>
+        <div class="workflow-step" data-step-indicator="3"><span>03</span><div><strong>Your preview</strong><small>Explore a new look</small></div></div>
+      </div>
+      <div class="workflow-panel">
+        <section class="workflow-section" id="clothing-step" aria-labelledby="clothing-heading">
+          <div class="workflow-section-head"><span class="step-kicker">STEP 01</span><h2 id="clothing-heading">Choose the piece you love</h2><p>Paste a product link from a supported store, or upload a clothing image.</p></div>
+          <form id="product-form" class="product-url-form" novalidate>
+            <label class="form-label" for="product-url">Product page URL</label>
+            <div class="url-control"><span class="url-icon"><i class="bi bi-link-45deg"></i></span><input id="product-url" name="productUrl" type="url" inputmode="url" placeholder="Paste a clothing product URL here..." autocomplete="url"><button class="paste-button" type="button" id="paste-url"><i class="bi bi-clipboard"></i> Paste</button></div>
+            <div class="form-actions"><button class="btn btn-primary-soft" id="fetch-product" type="submit"><span class="button-label">Fetch product</span><span class="button-spinner" hidden><span class="spinner-border spinner-border-sm" aria-hidden="true"></span> Checking link...</span></button><span class="form-hint"><i class="bi bi-info-circle"></i> Retailer support varies. You can upload an image instead.</span></div>
+            <p class="field-error" id="product-error" role="alert" hidden></p>
+          </form>
+          <div id="product-preview" class="product-preview" hidden aria-live="polite"></div>
+          <div class="upload-divider"><span>OR UPLOAD A CLOTHING IMAGE</span></div>
+          <div class="upload-card garment-upload" data-upload-card="garment">
+            <input class="visually-hidden" id="garment-file" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Choose a clothing image">
+            <div class="upload-empty" id="garment-empty"><span class="upload-icon"><i class="bi bi-image"></i></span><strong>Drop a garment image here</strong><span>or <button class="inline-button" type="button" data-browse="garment-file">browse files</button></span><small data-upload-limit>JPG, PNG or WebP · up to 8 MB</small></div>
+            <div class="upload-filled" id="garment-filled" hidden><img class="upload-preview-image" id="garment-preview-image" alt="Garment image preview"><div class="upload-file-meta"><strong id="garment-file-name"></strong><span>Ready to use as your clothing image</span></div><div class="upload-actions"><button type="button" class="icon-action" data-browse="garment-file" aria-label="Replace garment image"><i class="bi bi-arrow-repeat"></i></button><button type="button" class="icon-action remove-upload" data-remove="garment" aria-label="Remove garment image"><i class="bi bi-trash3"></i></button></div></div>
+            <p class="field-error upload-error" id="garment-error" role="alert" hidden></p>
+          </div>
+          <div class="selected-product-note" id="selected-product-note" hidden><i class="bi bi-check-circle-fill"></i><span id="selected-product-label"></span><button type="button" id="clear-product" class="text-button">Clear</button></div>
+          <div class="section-next"><span class="section-note"><i class="bi bi-lock"></i> Your clothing image stays in this browser until you request a preview.</span><button class="btn btn-outline-soft" type="button" data-go-step="2">Continue <i class="bi bi-arrow-right"></i></button></div>
+        </section>
+        <section class="workflow-section" id="photo-upload" aria-labelledby="photo-heading">
+          <div class="workflow-section-head"><span class="step-kicker">STEP 02</span><h2 id="photo-heading">Add a photo of yourself</h2><p>A clear, well-lit photo helps create a more useful visual preview.</p></div>
+          <div class="photo-guidelines"><div><i class="bi bi-brightness-high"></i><span>Good lighting</span></div><div><i class="bi bi-person-standing"></i><span>Body area visible</span></div><div><i class="bi bi-eye"></i><span>Minimal obstruction</span></div></div>
+          <div class="upload-card person-upload" data-upload-card="person">
+            <input class="visually-hidden" id="person-file" type="file" accept="image/jpeg,image/png,image/webp" aria-label="Choose your photo">
+            <div class="upload-empty" id="person-empty"><span class="upload-icon"><i class="bi bi-person-bounding-box"></i></span><strong>Drop your photo here</strong><span>or <button class="inline-button" type="button" data-browse="person-file">browse files</button></span><small data-upload-limit>JPG, PNG or WebP · up to 10 MB</small></div>
+            <div class="upload-filled" id="person-filled" hidden><img class="upload-preview-image person-preview-image" id="person-preview-image" alt="Your photo preview"><div class="upload-file-meta"><strong id="person-file-name"></strong><span>Your photo is ready</span></div><div class="upload-actions"><button type="button" class="icon-action" data-browse="person-file" aria-label="Replace personal photo"><i class="bi bi-arrow-repeat"></i></button><button type="button" class="icon-action remove-upload" data-remove="person" aria-label="Remove personal photo"><i class="bi bi-trash3"></i></button></div></div>
+            <p class="field-error upload-error" id="person-error" role="alert" hidden></p>
+          </div>
+          <label class="consent-row"><input type="checkbox" id="photo-consent"><span class="consent-check"><i class="bi bi-check"></i></span><span>I consent to sending my photo to the configured service to generate a virtual try-on preview. <a href="privacy.html">Learn about privacy</a>.</span></label>
+          <div class="section-next"><button class="btn btn-text-back" type="button" data-go-step="1"><i class="bi bi-arrow-left"></i> Back</button><button class="btn btn-outline-soft" type="button" data-go-step="3">Continue <i class="bi bi-arrow-right"></i></button></div>
+        </section>
+        <section class="workflow-section" id="category-step" aria-labelledby="category-heading">
+          <div class="workflow-section-head"><span class="step-kicker">STEP 03</span><h2 id="category-heading">What kind of piece is it?</h2><p>Choose the category that best describes your garment.</p></div>
+          <div class="category-options" role="group" aria-label="Garment category">
+            <button class="category-card" type="button" data-category="tops" aria-pressed="false"><i class="bi bi-bounding-box"></i><strong>Tops</strong><span>Shirts, blouses & more</span></button>
+            <button class="category-card" type="button" data-category="bottoms" aria-pressed="false"><i class="bi bi-columns"></i><strong>Bottoms</strong><span>Trousers, skirts & more</span></button>
+            <button class="category-card" type="button" data-category="one-pieces" aria-pressed="false"><i class="bi bi-person-standing-dress"></i><strong>One-pieces</strong><span>Dresses & jumpsuits</span></button>
+          </div>
+          <p class="field-error" id="category-error" role="alert" hidden>Please select a clothing category.</p>
+          <div class="section-next"><button class="btn btn-text-back" type="button" data-go-step="2"><i class="bi bi-arrow-left"></i> Back</button><button class="btn btn-primary-soft generate-button" id="generate-tryon" type="button" disabled><span class="generate-label">Generate my virtual look</span><span class="generate-spinner" hidden><span class="spinner-border spinner-border-sm" aria-hidden="true"></span> Preparing preview...</span><i class="bi bi-stars"></i></button></div>
+          <p class="generate-helper" id="generate-helper">Add a clothing image, your photo, choose a category, and give consent to continue.</p>
+        </section>
+        <section class="workflow-section processing-section" id="processing-state" aria-live="polite" hidden>
+          <div class="processing-visual"><span class="processing-ring"><i class="bi bi-stars"></i></span><span class="processing-pulse pulse-one"></span><span class="processing-pulse pulse-two"></span></div>
+          <span class="step-kicker">A MOMENT FOR YOUR LOOK</span><h2 id="processing-title">Creating your virtual look...</h2><p id="processing-message">Our AI is preparing your personalized fashion preview.</p>
+          <div class="processing-progress"><span></span></div><p class="processing-status" id="processing-status" role="status">Preparing your images...</p>
+          <p class="field-error" id="generation-error" role="alert" hidden></p><button class="btn btn-outline-soft" id="retry-generation" type="button" hidden>Try again <i class="bi bi-arrow-clockwise"></i></button>
+        </section>
+        <section class="workflow-section result-section" id="result-state" aria-labelledby="result-title" hidden>
+          <div class="workflow-section-head"><span class="step-kicker">YOUR PREVIEW</span><h2 id="result-title">Your virtual look is ready!</h2><p>This AI-generated image is a visual approximation and does not guarantee actual garment fit or sizing.</p></div>
+          <div class="result-comparison" id="result-comparison">
+            <img class="result-comparison-after" id="comparison-result-image" alt="Generated virtual try-on look">
+            <div class="result-comparison-before" id="result-comparison-before"><img id="comparison-person-image" alt="Your original photo"></div>
+            <span class="comparison-label label-before">YOUR PHOTO</span><span class="comparison-label label-after">AI PREVIEW</span>
+            <input class="comparison-range result-comparison-range" id="result-comparison-range" type="range" min="0" max="100" value="50" aria-label="Compare your photo with the generated virtual look">
+            <span class="comparison-handle" aria-hidden="true"><i class="bi bi-chevron-left"></i><i class="bi bi-chevron-right"></i></span>
+          </div>
+          <div class="result-product" id="result-product"><img id="result-garment-image" alt="Selected clothing"><div><span class="step-kicker">YOUR SELECTED PIECE</span><strong id="result-product-name">Clothing item</strong><span id="result-product-category"></span></div></div>
+          <div class="result-image-wrap"><img id="result-image" alt="AI-generated virtual try-on preview"><span class="result-badge"><i class="bi bi-stars"></i> AI preview</span></div>
+          <div class="result-actions"><a class="btn btn-primary-soft" id="download-result" href="#" download>Download image <i class="bi bi-download"></i></a><button class="btn btn-outline-soft" id="save-result" type="button" hidden>Save result <i class="bi bi-bookmark"></i></button><button class="btn btn-outline-soft" id="delete-result" type="button" hidden>Delete result <i class="bi bi-trash3"></i></button><a class="btn btn-text-back" id="back-to-store" href="#" target="_blank" rel="noopener noreferrer" hidden>Back to store <i class="bi bi-box-arrow-up-right"></i></a><button class="btn btn-text-back" id="try-another" type="button">Try another outfit <i class="bi bi-arrow-repeat"></i></button></div>
+          <p class="result-disclaimer"><i class="bi bi-info-circle"></i> Visual approximation only — not a physical fit or sizing guarantee.</p>
+        </section>
+      </div>
+    </section>
+  </main>
+  <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+  <footer class="site-footer"><div class="container"><div class="footer-main"><div class="footer-about"><a class="brand footer-brand" href="index.html"><span class="brand-mark"><i class="bi bi-stars"></i></span><span>fitmirror<span class="brand-ai">.ai</span></span></a><p>A little more imagination in the way you explore what to wear.</p></div><div class="footer-links"><strong>Explore</strong><a href="index.html">Home</a><a href="try-on.html">Virtual Try-On</a><a href="history.html">My History</a></div><div class="footer-links"><strong>Learn more</strong><a href="privacy.html">Privacy</a><a href="index.html#faqAccordion">FAQs</a></div><div class="footer-disclaimer"><i class="bi bi-info-circle"></i><p>AI-generated previews are visual approximations and do not guarantee actual garment fit or sizing.</p></div></div><div class="footer-bottom"><span>© <span data-current-year></span> FitMirror AI</span><span>Made for the joy of discovering your style.</span></div></div></footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="js/api.js" defer></script><script src="js/upload.js" defer></script><script src="js/product.js" defer></script><script src="js/try-on.js" defer></script><script src="js/main.js" defer></script>
+</body>
+</html>

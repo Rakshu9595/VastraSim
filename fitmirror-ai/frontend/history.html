@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#faf9f6">
+  <meta name="description" content="View and manage your saved FitMirror AI virtual try-on sessions.">
+  <title>Your Virtual Wardrobe — FitMirror AI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"><link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/history.css">
+</head>
+<body class="history-page">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header"><nav class="navbar navbar-expand-lg site-nav" aria-label="Main navigation"><div class="container">
+    <a class="navbar-brand brand" href="index.html" aria-label="FitMirror AI home"><span class="brand-mark"><i class="bi bi-stars"></i></span><span>fitmirror<span class="brand-ai">.ai</span></span></a>
+    <button class="navbar-toggler nav-toggle" type="button" aria-expanded="false" aria-controls="mainNav" aria-label="Open navigation"><span class="navbar-toggler-icon"></span></button>
+    <div class="collapse navbar-collapse" id="mainNav"><ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2"><li class="nav-item"><a class="nav-link" href="index.html">Home</a></li><li class="nav-item"><a class="nav-link" href="try-on.html">Virtual Try-On</a></li><li class="nav-item"><a class="nav-link active" aria-current="page" href="history.html">My History</a></li><li class="nav-item"><a class="nav-link" href="privacy.html">Privacy</a></li><li class="nav-item ms-lg-3"><a class="btn btn-primary-soft" href="try-on.html">Try it now <i class="bi bi-arrow-up-right"></i></a></li></ul></div>
+  </div></nav></header>
+  <main id="main" class="history-main container">
+    <section class="history-heading"><div><p class="eyebrow"><span class="eyebrow-dot"></span> Your personal style archive</p><h1>Your virtual<br><em>wardrobe.</em></h1><p>Explore and manage your previous virtual try-on sessions.</p></div><button class="btn btn-outline-soft" id="refresh-history" type="button"><i class="bi bi-arrow-clockwise"></i> Refresh</button></section>
+    <section id="history-content" aria-live="polite" aria-busy="true">
+      <div class="history-skeleton-grid" id="history-loading" aria-label="Loading your wardrobe"><div class="history-skeleton"><span></span><i></i><i></i></div><div class="history-skeleton"><span></span><i></i><i></i></div><div class="history-skeleton"><span></span><i></i><i></i></div></div>
+      <div class="history-empty" id="history-empty" hidden><span class="empty-icon"><i class="bi bi-stars"></i></span><h2>Your virtual wardrobe is waiting</h2><p>You haven't saved any virtual looks yet. Start your first AI-powered fashion experience.</p><a class="btn btn-primary-soft" href="try-on.html">Create your first look <i class="bi bi-arrow-up-right"></i></a></div>
+      <div class="history-error" id="history-error" hidden role="alert"><span class="empty-icon"><i class="bi bi-cloud-slash"></i></span><h2>Your wardrobe couldn't load</h2><p id="history-error-message">The history service is unavailable right now.</p><button class="btn btn-outline-soft" type="button" id="retry-history">Try again <i class="bi bi-arrow-clockwise"></i></button></div>
+      <div class="history-grid" id="history-grid"></div>
+    </section>
+    <p class="history-note"><i class="bi bi-info-circle"></i> Your saved sessions are retrieved from the connected service. No sample sessions are shown.</p>
+  </main>
+  <dialog class="history-dialog" id="session-dialog" aria-labelledby="dialog-title"><div class="dialog-head"><div><span class="step-kicker">SAVED VIRTUAL LOOK</span><h2 id="dialog-title">Session details</h2></div><button type="button" class="icon-action" id="close-session-dialog" aria-label="Close details"><i class="bi bi-x-lg"></i></button></div><div id="dialog-content"></div></dialog>
+  <dialog class="history-dialog delete-dialog" id="delete-dialog" aria-labelledby="delete-title"><div class="dialog-head"><div><span class="step-kicker">CONFIRM ACTION</span><h2 id="delete-title">Delete this look?</h2></div><button type="button" class="icon-action" id="cancel-delete-x" aria-label="Close confirmation"><i class="bi bi-x-lg"></i></button></div><p>This removes the saved session from your history if the service supports deletion. This action cannot be undone.</p><div class="dialog-actions"><button class="btn btn-outline-soft" type="button" id="cancel-delete">Keep it</button><button class="btn btn-danger-soft" type="button" id="confirm-delete">Delete look <i class="bi bi-trash3"></i></button></div></dialog>
+  <div class="toast-region" id="toast-region" aria-live="polite" aria-atomic="true"></div>
+  <footer class="site-footer"><div class="container"><div class="footer-main"><div class="footer-about"><a class="brand footer-brand" href="index.html"><span class="brand-mark"><i class="bi bi-stars"></i></span><span>fitmirror<span class="brand-ai">.ai</span></span></a><p>A little more imagination in the way you explore what to wear.</p></div><div class="footer-links"><strong>Explore</strong><a href="index.html">Home</a><a href="try-on.html">Virtual Try-On</a><a href="history.html">My History</a></div><div class="footer-links"><strong>Learn more</strong><a href="privacy.html">Privacy</a><a href="try-on.html#photo-upload">Photo guidelines</a></div><div class="footer-disclaimer"><i class="bi bi-info-circle"></i><p>AI-generated previews are visual approximations and do not guarantee actual garment fit or sizing.</p></div></div><div class="footer-bottom"><span>© <span data-current-year></span> FitMirror AI</span><span>Made for the joy of discovering your style.</span></div></div></footer>
+  <script src="js/api.js" defer></script><script src="js/history.js" defer></script><script src="js/main.js" defer></script>
+</body>
+</html>
