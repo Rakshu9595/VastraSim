@@ -1,18 +1,6 @@
 import multer from "multer";
 import sharp from "sharp";
 
-/**
- * FitMirror AI
- * Image Upload Middleware
- *
- * Responsibilities:
- * 1. Receive image uploads
- * 2. Validate file size
- * 3. Validate image format
- * 4. Inspect actual image content
- * 5. Normalize images
- * 6. Forward validated images to controllers
- */
 
 // Maximum upload size: 10 MB
 const MAX_FILE_SIZE = 10 * 1024 * 1024;
