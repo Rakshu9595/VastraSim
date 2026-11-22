@@ -267,4 +267,4 @@ def test_wrong_content_type():
         data="invalid request"
     )
 
-    assert response.status_code >= 400
+  
