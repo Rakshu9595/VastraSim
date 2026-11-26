@@ -1,17 +1,3 @@
-
-"""
-FitMirror AI
-AI Service API Routes
-
-Endpoints:
-    GET  /health
-    POST /api/tryon
-
-The Express backend calls the try-on endpoint.
-The AI service verifies the shared secret, validates
-the request, runs inference, and returns a Base64 image.
-"""
-
 import base64
 import hmac
 import logging
